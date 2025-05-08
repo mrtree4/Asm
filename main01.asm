@@ -1,8 +1,8 @@
-﻿.386
+.386
 
 ; Исходные данные
 dseg segment use16
-    arr db 12h, 34h, 56h, 78h, 90h
+    arr  db 12h, 34h, 56h, 78h, 90h
     code dw 0FFFBh
     symb db 'TBO'
 dseg ends
@@ -24,10 +24,10 @@ m:  mov ax, dseg
     mov es:res, al
 
     ; Пересылка старшего байта слова
-    mov al, ds:code+1
+    mov al, byte ptr ds:code+1
     mov es:res+1, al
 
-    ; Пересылка третьего символа
+    ; Пересылка 3-го символа
     mov al, ds:symb+2
     mov es:res+2, al
     
