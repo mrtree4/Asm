@@ -3,19 +3,20 @@
 dseg segment use16
     numb1 db 6Ah
     numb2 dw 07F2Dh   
-    res1 dd ?  
-    res2 dd ?    
-    res3 dw ?
+    result dd ?  
+    change dd ?    
+    code   dw ?
 dseg ends
+
 cseg segment use16
 assume ds:dseg, cs:cseg
-m1:
-    mov cx, dseg
+m1: mov cx, dseg
     mov ds, cx
     movzx ax, ds:numb1
     mul ds:numb2
-    mov bl, al
-    mov bh, dh
+    ; сохранение в result
+    mov bl, al ;мл. байт
+    mov bh, dh ;ст. байт
     mov ds:res2, ebx
     rol bx, 8
     shl edx, 16
