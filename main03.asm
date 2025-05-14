@@ -10,19 +10,19 @@ assume ds:dseg, cs:cseg
 m1:  mov cx, dseg
      mov ds, cx
 
-     cmp ds:x, 30
+     movsx ax, ds:x
+     cmp ax, 30
      jb short f1
      je short f2
-     mov ax, 84d
-     sub ax, word ptr ds:x ; -x + 84
+     neg ax
+     add ax, 84
      jmp short fin
 
-f1:  mov ax, 120d
-     sub ax, word ptr ds:x ; 120 - x
+f1:  neg ax
+     add ax, 120
      jmp short fin
 
-f2:  mov ax, 140d
-     add ax, word ptr ds:x ; 140 + x
+f2:  add ax, 140
 
 fin: mov ds:y, ax
 
